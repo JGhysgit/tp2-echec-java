@@ -10,7 +10,7 @@ class Plateau {
 
     public Plateau(boolean cheat) {
         pieces = new ArrayList<Piece>();
-        if (cheat) {
+        if (cheat == true) {
             initialiserCheat();
         } else {
             initialiserClassique();
@@ -43,32 +43,46 @@ class Plateau {
     }
 
     private void initialiserCheat() {
-        this.ajouterPiece(new Tour('B', new Position("A1")));
-        this.ajouterPiece(new Cavalier('B', new Position("B1")));
-        this.ajouterPiece(new Favalier('B', new Position("C1"))); // Favalier à la place du fou gauche
-        this.ajouterPiece(new Tavalier('B', new Position("D1"))); // Tavalier à la place du pion devant fou
-        this.ajouterPiece(new Roi('B', new Position("E1")));
-        this.ajouterPiece(new Favalier('B', new Position("F1"))); // Favalier à la place du fou droit
-        this.ajouterPiece(new Cavalier('B', new Position("G1")));
-        this.ajouterPiece(new Tour('B', new Position("H1")));
-
-        for (char c = 'A'; c < 'I'; c++) {
-            // Pions normaux sauf devant C1, D1, F1 et E1
-            if (c == 'C' || c == 'D' || c == 'F' || c == 'E')
-                continue;
-            this.ajouterPiece(new PionBlanc(new Position(c + "2")));
-            this.ajouterPiece(new PionNoir(new Position(c + "7")));
-        }
-
-        this.ajouterPiece(new Tour('N', new Position("A8")));
-        this.ajouterPiece(new Cavalier('N', new Position("B8")));
-        this.ajouterPiece(new Favalier('N', new Position("C8")));
-        this.ajouterPiece(new Tavalier('N', new Position("D8")));
-        this.ajouterPiece(new Roi('N', new Position("E8")));
-        this.ajouterPiece(new Favalier('N', new Position("F8")));
-        this.ajouterPiece(new Cavalier('N', new Position("G8")));
-        this.ajouterPiece(new Tour('N', new Position("H8")));
-    }
+		// Ligne de fond - blancs
+		this.ajouterPiece(new Tour('B', new Position("A1")));
+		this.ajouterPiece(new Cavalier('B', new Position("B1")));
+		this.ajouterPiece(new Fou('B', new Position("C1")));
+		this.ajouterPiece(new Dame('B', new Position("D1")));
+		this.ajouterPiece(new Roi('B', new Position("E1")));
+		this.ajouterPiece(new Fou('B', new Position("F1")));
+		this.ajouterPiece(new Cavalier('B', new Position("G1")));
+		this.ajouterPiece(new Tour('B', new Position("H1")));
+	
+		// Ligne de pions - blancs
+		this.ajouterPiece(new PionBlanc(new Position("A2")));
+		this.ajouterPiece(new PionBlanc(new Position("B2")));
+		this.ajouterPiece(new Tavalier('B', new Position("C2")));   // devant fou
+		this.ajouterPiece(new Favalier('B', new Position("D2")));   // devant dame
+		this.ajouterPiece(new Favalier('B', new Position("E2")));   // devant roi
+		this.ajouterPiece(new Tavalier('B', new Position("F2")));   // devant fou
+		this.ajouterPiece(new PionBlanc(new Position("G2")));
+		this.ajouterPiece(new PionBlanc(new Position("H2")));
+	
+		// Ligne de fond - noirs
+		this.ajouterPiece(new Tour('N', new Position("A8")));
+		this.ajouterPiece(new Cavalier('N', new Position("B8")));
+		this.ajouterPiece(new Fou('N', new Position("C8")));
+		this.ajouterPiece(new Dame('N', new Position("D8")));
+		this.ajouterPiece(new Roi('N', new Position("E8")));
+		this.ajouterPiece(new Fou('N', new Position("F8")));
+		this.ajouterPiece(new Cavalier('N', new Position("G8")));
+		this.ajouterPiece(new Tour('N', new Position("H8")));
+	
+		// Ligne de pions - noirs
+		this.ajouterPiece(new PionNoir(new Position("A7")));
+		this.ajouterPiece(new PionNoir(new Position("B7")));
+		this.ajouterPiece(new Tavalier('N', new Position("C7")));   // devant fou
+		this.ajouterPiece(new Favalier('N', new Position("D7")));   // devant dame
+		this.ajouterPiece(new Favalier('N', new Position("E7")));   // devant roi
+		this.ajouterPiece(new Tavalier('N', new Position("F7")));   // devant fou
+		this.ajouterPiece(new PionNoir(new Position("G7")));
+		this.ajouterPiece(new PionNoir(new Position("H7")));
+	}
 
     private boolean ajouterPiece(Piece p){
 	// Vérifier si une pièce n'est pas déjà placé sur la case.
@@ -217,7 +231,7 @@ class Plateau {
     
 
     public static void main(String[] args){
-	Plateau p = new Plateau();
+	Plateau p = new Plateau(true);
 	System.out.println(p);
     }
 }
